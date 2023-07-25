@@ -1,6 +1,6 @@
 import {
   CircularProgress,
-  Grid,
+  // Grid,
   Typography,
   InputLabel,
   MenuItem,
@@ -10,6 +10,7 @@ import {
 import { useState } from "react";
 import PlaceDetails from "../PlaceDetails/PlaceDetails";
 import useStyles from "./styles";
+import Grid from "@mui/material/Grid";
 
 const List = () => {
   const classes = useStyles();
