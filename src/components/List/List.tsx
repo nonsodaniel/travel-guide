@@ -12,15 +12,11 @@ import PlaceDetails from "../PlaceDetails/PlaceDetails";
 import useStyles from "./styles";
 import Grid from "@mui/material/Grid";
 
-const List = () => {
+const List = ({ places }: any) => {
   const classes = useStyles();
   const [type, setType] = useState("resturants");
   const [rating, setRating] = useState(0);
-  const places = [
-    { name: "Bistro" },
-    { name: "Suya spot" },
-    { name: "Landmark Beach" },
-  ];
+
   return (
     <div className={classes.container}>
       <Typography variant="h4">

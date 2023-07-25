@@ -1,5 +1,6 @@
 import { Paper, Typography, useMediaQuery } from "@material-ui/core";
 import GoogleMapReact from "google-map-react";
+import { API_KEY } from "../../utils/config";
 import useStyles from "./styles";
 interface IMapProps {
   coordinates: any;
@@ -23,7 +24,7 @@ const Map = ({ coordinates, setBounds, setCoordinates }: IMapProps) => {
   return (
     <div className={classes.mapContainer}>
       <GoogleMapReact
-        bootstrapURLKeys={{ key: "AIzaSyDaaeEXOe2U9WUBNCzL5PqfrcE4-eoVS1" }}
+        bootstrapURLKeys={{ key: API_KEY }}
         center={coordinates}
         defaultCenter={coordinates}
         defaultZoom={14}
