@@ -1,7 +1,8 @@
-import { AppBar, Toolbar, Typography, Box, InputBase } from "@mui/material";
+import { AppBar, Toolbar, Typography, InputBase } from "@mui/material";
 // import { Autocomplete } from "@react-google-maps/api";
 import { Search } from "@mui/icons-material";
 import useStyles from "./styles";
+import Box from "@mui/material/Box";
 
 const Header = () => {
   const classes = useStyles();
