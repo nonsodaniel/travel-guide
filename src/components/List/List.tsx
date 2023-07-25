@@ -8,12 +8,18 @@ import {
   Select,
 } from "@material-ui/core";
 import { useState } from "react";
+import PlaceDetails from "../PlaceDetails/PlaceDetails";
 import useStyles from "./styles";
 
 const List = () => {
   const classes = useStyles();
   const [type, setType] = useState("resturants");
   const [rating, setRating] = useState(0);
+  const places = [
+    { name: "Bistro" },
+    { name: "Suya spot" },
+    { name: "Landmark Beach" },
+  ];
   return (
     <div className={classes.container}>
       <Typography variant="h4">
@@ -37,6 +43,13 @@ const List = () => {
           <MenuItem value={3}>3</MenuItem>
         </Select>
       </FormControl>
+      <Grid container spacing={3} className={classes.list}>
+        {places.map((place) => (
+          <Grid item key={place.name} xs={12}>
+            <PlaceDetails {...place} />
+          </Grid>
+        ))}
+      </Grid>
     </div>
   );
 };
