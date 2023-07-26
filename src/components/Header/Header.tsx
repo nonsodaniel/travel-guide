@@ -1,9 +1,10 @@
-import { AppBar, Toolbar, Typography, InputBase } from "@mui/material";
+import { AppBar, Toolbar, Typography } from "@mui/material";
 import { Autocomplete } from "@react-google-maps/api";
 import { Search } from "@mui/icons-material";
 import useStyles from "./styles";
 import Box from "@mui/material/Box";
 import { useState } from "react";
+import InputBase from "@mui/material/InputBase";
 
 const Header = ({ setCoordinates }: any) => {
   const classes = useStyles();
@@ -19,21 +20,26 @@ const Header = ({ setCoordinates }: any) => {
   };
 
   return (
-    <AppBar position={"static"}>
+    <AppBar position="static">
       <Toolbar className={classes.toolbar}>
-        <Typography className={classes.title} variant="h5">
-          Travel Guide
+        <Typography variant="h5" className={classes.title}>
+          Travel Buddy
         </Typography>
         <Box display="flex">
-          <Typography variant="h6">Explore the globe</Typography>
+          <Typography variant="h6" className={classes.title}>
+            Explore new places
+          </Typography>
           <Autocomplete onLoad={onLoad} onPlaceChanged={onPlaceChange}>
             <div className={classes.search}>
               <div className={classes.searchIcon}>
                 <Search />
               </div>
               <InputBase
-                placeholder="Search..."
+                placeholder="Search…"
                 classes={{ root: classes.inputRoot, input: classes.inputInput }}
+                sx={{
+                  ...InputCSS,
+                }}
               />
             </div>
           </Autocomplete>
@@ -41,6 +47,10 @@ const Header = ({ setCoordinates }: any) => {
       </Toolbar>
     </AppBar>
   );
+};
+
+const InputCSS = {
+  padding: "0px",
 };
 
 export default Header;

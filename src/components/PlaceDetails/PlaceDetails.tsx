@@ -3,11 +3,10 @@ import {
   Card,
   CardMedia,
   CardContent,
-  useMediaQuery,
   Typography,
   CardActions,
 } from "@material-ui/core";
-import { LocationOn, Phone, ContactPhone } from "@mui/icons-material";
+import { LocationOn, Phone } from "@mui/icons-material";
 import { Rating } from "@mui/material";
 import useStyles from "./styles";
 import Box from "@mui/material/Box";
@@ -16,13 +15,11 @@ import Chip from "@mui/material/Chip";
 interface IPlaceDetailsProps {
   place: any;
   selected: any;
-
   refProps: any;
 }
 
 const PlaceDetails = ({ place, selected, refProps }: IPlaceDetailsProps) => {
   const classes = useStyles();
-  console.log("place", place);
   if (selected)
     refProps?.current?.scrollIntoView({ behavior: "smooth", block: "start)" });
   return (
