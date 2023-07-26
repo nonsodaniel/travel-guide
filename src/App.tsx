@@ -9,18 +9,22 @@ import { IBoundsProps, ILatLngProps } from "./utils/types";
 
 function App() {
   const [places, setPlaces] = useState(null);
-  const [coordinates, setCoordinates] = useState<ILatLngProps>({
-    lat: 0,
-    lng: 0,
-  });
+  const [coordinates, setCoordinates] = useState<ILatLngProps | null>(null);
   const [bounds, setBounds] = useState<IBoundsProps | null>(null);
 
   useEffect(() => {
-    navigator.geolocation.getCurrentPosition(
-      ({ coords: { latitude, longitude } }: any) => {
+    // navigator.geolocation.getCurrentPosition(
+    //   ({ coords: { latitude, longitude } }: any) => {
+    //     setCoordinates({ lat: latitude, lng: longitude });
+    //   }
+    // );
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        let latitude = position.coords.latitude;
+        let longitude = position.coords.longitude;
         setCoordinates({ lat: latitude, lng: longitude });
-      }
-    );
+      });
+    }
   }, []);
 
   useEffect(() => {
@@ -43,11 +47,14 @@ function App() {
           )}
 
           <Grid item xs={12} md={4}>
-            <Map
-              coordinates={coordinates}
-              setBounds={setBounds}
-              setCoordinates={setCoordinates}
-            />
+            {coordinates && (
+              <Map
+                coordinates={coordinates}
+                setBounds={setBounds}
+                setCoordinates={setCoordinates}
+                places={places}
+              />
+            )}
           </Grid>
         </Grid>
       </CssBaseline>
