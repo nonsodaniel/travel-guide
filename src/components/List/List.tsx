@@ -13,11 +13,17 @@ import PlaceDetails from "../PlaceDetails/PlaceDetails";
 import useStyles from "./styles";
 import Grid from "@mui/material/Grid";
 
-const List = ({ places, childClicked, loading }: any) => {
+const List = ({
+  places,
+  childClicked,
+  loading,
+  type,
+  setType,
+  rating,
+  setRating,
+}: any) => {
   const classes = useStyles();
 
-  const [type, setType] = useState("resturants");
-  const [rating, setRating] = useState(0);
   const [elRefs, setElRefs] = useState([]);
 
   useEffect(() => {
@@ -43,7 +49,7 @@ const List = ({ places, childClicked, loading }: any) => {
             <InputLabel>Type</InputLabel>
 
             <Select value={type} onChange={(e: any) => setType(e.target.value)}>
-              <MenuItem value={"resturants"}>Resturants</MenuItem>
+              <MenuItem value={"restaurants"}>Resturants</MenuItem>
               <MenuItem value={"hotels"}>Hotels</MenuItem>
               <MenuItem value={"attractions"}>Attractions</MenuItem>
             </Select>
@@ -54,10 +60,10 @@ const List = ({ places, childClicked, loading }: any) => {
               value={rating}
               onChange={(e: any) => setRating(e.target.value)}
             >
-              <MenuItem value={0}>0</MenuItem>
-              <MenuItem value={1}>1</MenuItem>
-              <MenuItem value={2}>2</MenuItem>
-              <MenuItem value={3}>3</MenuItem>
+              <MenuItem value="">All</MenuItem>
+              <MenuItem value="3">Above 3.0</MenuItem>
+              <MenuItem value="4">Above 4.0</MenuItem>
+              <MenuItem value="4.5">Above 4.5</MenuItem>
             </Select>
           </FormControl>
           <Grid container spacing={3} className={classes.list}>
