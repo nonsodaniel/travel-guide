@@ -11,11 +11,13 @@ const Header = ({ setCoordinates }: any) => {
   const onLoad = (data) => setAutoComplete(data);
   const onPlaceChange = () => {
     //@ts-ignore
-    const location = autocomplete?.getPlace().geometry.location.lat();
-    const lat = location.lat;
-    const lng = location.lng;
-    setCoordinates({ lat, lng });
+
+    const location = autocomplete?.getPlace().geometry.location;
+    const lat = location.lat();
+    const lng = location.lng();
+    if (lat && lng) setCoordinates({ lat, lng });
   };
+
   return (
     <AppBar position={"static"}>
       <Toolbar className={classes.toolbar}>

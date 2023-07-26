@@ -39,7 +39,6 @@ interface IMapProps {
   places: any;
   setChildClicked: any;
 }
-const AnyReactComponent = ({ text, lat, lng }: any) => <div>{text}</div>;
 
 const Map = ({
   coordinates,
@@ -52,17 +51,16 @@ const Map = ({
   const isDesktop = useMediaQuery(`(min-width:600px)`);
 
   const handleChange = (event: any) => {
-    console.log("event", event);
     setCoordinates({ lat: event.center.lat, lng: event.center.lng });
     setBounds({
       ne: event.marginBounds.ne,
       sw: event.marginBounds.sw,
     });
   };
-  console.log("coordinates", coordinates, isDesktop);
   return (
     <div className={classes.mapContainer}>
       <GoogleMapReact
+        key={`${coordinates.lat}-${coordinates.lng}`}
         bootstrapURLKeys={{ key: API_KEY }}
         center={coordinates}
         defaultCenter={coordinates}

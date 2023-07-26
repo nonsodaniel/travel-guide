@@ -35,14 +35,14 @@ function App() {
   useEffect(() => {
     setLoading(true);
     if (bounds) {
-      getPlacesData(type, bounds?.sw, bounds?.ne).then((data) => {
+      getPlacesData(type, bounds.sw, bounds.ne).then((data) => {
         console.log("data", data);
-        setPlaces(data);
+        setPlaces(data.filter((place) => place.name && place.num_reviews > 0));
         setLoading(false);
       });
     }
-  }, [type, coordinates, bounds]);
-  console.log("place", places);
+  }, [type, bounds]);
+
   return (
     <Fragment>
       <CssBaseline>
