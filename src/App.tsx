@@ -9,6 +9,7 @@ import { IBoundsProps, ILatLngProps } from "./utils/types";
 
 function App() {
   const [places, setPlaces] = useState(null);
+  const [childClicked, setChildClicked] = useState(null);
   const [coordinates, setCoordinates] = useState<ILatLngProps | null>(null);
   const [bounds, setBounds] = useState<IBoundsProps | null>(null);
 
@@ -42,17 +43,18 @@ function App() {
         <Grid container spacing={3} style={{ width: "100%" }}>
           {places && (
             <Grid item xs={12} md={4}>
-              <List places={places} />
+              <List places={places} childClicked={childClicked} />
             </Grid>
           )}
 
-          <Grid item xs={12} md={4}>
+          <Grid item xs={12} md={8}>
             {coordinates && (
               <Map
                 coordinates={coordinates}
                 setBounds={setBounds}
                 setCoordinates={setCoordinates}
                 places={places}
+                setChildClicked={setChildClicked}
               />
             )}
           </Grid>

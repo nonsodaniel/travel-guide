@@ -1,3 +1,4 @@
+import { useEffect, createRef } from "react";
 import {
   CircularProgress,
   // Grid,
@@ -12,7 +13,7 @@ import PlaceDetails from "../PlaceDetails/PlaceDetails";
 import useStyles from "./styles";
 import Grid from "@mui/material/Grid";
 
-const List = ({ places }: any) => {
+const List = ({ places, childClicked }: any) => {
   const classes = useStyles();
   const [type, setType] = useState("resturants");
   const [rating, setRating] = useState(0);
