@@ -8,17 +8,13 @@ import { getPlacesData } from "./apiServices/apiServices";
 import { IBoundsProps, ILatLngProps } from "./utils/types";
 
 function App() {
+  const [loading, setLoading] = useState(false);
   const [places, setPlaces] = useState(null);
   const [childClicked, setChildClicked] = useState(null);
   const [coordinates, setCoordinates] = useState<ILatLngProps | null>(null);
   const [bounds, setBounds] = useState<IBoundsProps | null>(null);
 
   useEffect(() => {
-    // navigator.geolocation.getCurrentPosition(
-    //   ({ coords: { latitude, longitude } }: any) => {
-    //     setCoordinates({ lat: latitude, lng: longitude });
-    //   }
-    // );
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
         let latitude = position.coords.latitude;
@@ -29,21 +25,28 @@ function App() {
   }, []);
 
   useEffect(() => {
+    setLoading(true);
     if (bounds) {
-      getPlacesData(bounds.sw, bounds.ne).then((data) => {
+      getPlacesData(bounds?.sw, bounds?.ne).then((data) => {
         console.log("data", data);
         setPlaces(data);
+        setLoading(false);
       });
     }
   }, [coordinates, bounds]);
+  console.log("place", places);
   return (
     <Fragment>
       <CssBaseline>
-        <Header />
+        <Header setCoordinates={setCoordinates} />
         <Grid container spacing={3} style={{ width: "100%" }}>
           {places && (
             <Grid item xs={12} md={4}>
-              <List places={places} childClicked={childClicked} />
+              <List
+                loading={loading}
+                places={places}
+                childClicked={childClicked}
+              />
             </Grid>
           )}
 

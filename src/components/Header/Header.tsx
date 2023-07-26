@@ -1,11 +1,21 @@
 import { AppBar, Toolbar, Typography, InputBase } from "@mui/material";
-// import { Autocomplete } from "@react-google-maps/api";
+import { Autocomplete } from "@react-google-maps/api";
 import { Search } from "@mui/icons-material";
 import useStyles from "./styles";
 import Box from "@mui/material/Box";
+import { useState } from "react";
 
-const Header = () => {
+const Header = ({ setCoordinates }: any) => {
   const classes = useStyles();
+  const [autocomplete, setAutoComplete] = useState(null);
+  const onLoad = (data) => setAutoComplete(data);
+  const onPlaceChange = () => {
+    //@ts-ignore
+    const location = autocomplete?.getPlace().geometry.location.lat();
+    const lat = location.lat;
+    const lng = location.lng;
+    setCoordinates({ lat, lng });
+  };
   return (
     <AppBar position={"static"}>
       <Toolbar className={classes.toolbar}>
@@ -14,17 +24,17 @@ const Header = () => {
         </Typography>
         <Box display="flex">
           <Typography variant="h6">Explore the globe</Typography>
-          {/* <Autocomplete> */}
-          <div className={classes.search}>
-            <div className={classes.searchIcon}>
-              <Search />
+          <Autocomplete onLoad={onLoad} onPlaceChanged={onPlaceChange}>
+            <div className={classes.search}>
+              <div className={classes.searchIcon}>
+                <Search />
+              </div>
+              <InputBase
+                placeholder="Search..."
+                classes={{ root: classes.inputRoot, input: classes.inputInput }}
+              />
             </div>
-            <InputBase
-              placeholder="Search..."
-              classes={{ root: classes.inputRoot, input: classes.inputInput }}
-            />
-          </div>
-          {/* </Autocomplete> */}
+          </Autocomplete>
         </Box>
       </Toolbar>
     </AppBar>

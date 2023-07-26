@@ -65,7 +65,7 @@ const Map = ({
       <GoogleMapReact
         bootstrapURLKeys={{ key: API_KEY }}
         center={coordinates}
-        defaultCenter={{ lat: 51.50735, lng: -0.127758 }}
+        defaultCenter={coordinates}
         defaultZoom={5}
         margin={[50, 50, 50, 50]}
         options={""}

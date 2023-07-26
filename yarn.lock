@@ -2038,7 +2038,7 @@
 
 "@react-google-maps/api@^2.19.0":
   version "2.19.0"
-  resolved "https://registry.npmjs.org/@react-google-maps/api/-/api-2.19.0.tgz"
+  resolved "https://registry.yarnpkg.com/@react-google-maps/api/-/api-2.19.0.tgz#80f824e460422e09f9f76ad7690ea4211187835c"
   integrity sha512-NRfdrdHCDTSn+GMMZfE2FgoR2CzklZhAIz3X7SL2q6oeGN6PzL+2RhRt3YxSt/L10eUl31rzwlwo2XIgkiHrCQ==
   dependencies:
     "@googlemaps/js-api-loader" "1.16.2"

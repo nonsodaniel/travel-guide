@@ -15,11 +15,16 @@ import Chip from "@mui/material/Chip";
 
 interface IPlaceDetailsProps {
   place: any;
+  selected: any;
+
+  refProps: any;
 }
 
-const PlaceDetails = ({ place }: IPlaceDetailsProps) => {
+const PlaceDetails = ({ place, selected, refProps }: IPlaceDetailsProps) => {
   const classes = useStyles();
   console.log("place", place);
+  if (selected)
+    refProps?.current?.scrollIntoView({ behavior: "smooth", block: "start)" });
   return (
     <Card elevation={6}>
       <CardMedia
