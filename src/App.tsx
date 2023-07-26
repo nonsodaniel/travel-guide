@@ -4,12 +4,13 @@ import Grid from "@mui/material/Grid";
 import Header from "./components/Header/Header";
 import List from "./components/List/List";
 import Map from "./components/Map/Map";
-import { getPlacesData } from "./apiServices/apiServices";
+import { getPlacesData, getWeatherData } from "./apiServices/apiServices";
 import { IBoundsProps, ILatLngProps } from "./utils/types";
 
 function App() {
   const [loading, setLoading] = useState(false);
   const [places, setPlaces] = useState(null);
+  const [weatherData, setWeatherData] = useState(null);
   const [childClicked, setChildClicked] = useState(null);
   const [coordinates, setCoordinates] = useState<ILatLngProps | null>(null);
   const [bounds, setBounds] = useState<IBoundsProps | null>(null);
@@ -35,14 +36,17 @@ function App() {
   useEffect(() => {
     setLoading(true);
     if (bounds) {
+      getWeatherData(coordinates?.lat, coordinates?.lng).then((data) =>
+        setWeatherData(data)
+      );
       getPlacesData(type, bounds.sw, bounds.ne).then((data) => {
         console.log("data", data);
-        setPlaces(data.filter((place) => place.name && place.num_reviews > 0));
+        setPlaces(data.filter((place) => place.name));
         setLoading(false);
       });
     }
   }, [type, bounds]);
-
+  console.log("places data", places);
   return (
     <Fragment>
       <CssBaseline>
@@ -70,6 +74,7 @@ function App() {
                 setCoordinates={setCoordinates}
                 places={filteredPlaces?.length ? filteredPlaces : places}
                 setChildClicked={setChildClicked}
+                weatherData={weatherData}
               />
             )}
           </Grid>

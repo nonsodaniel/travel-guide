@@ -38,6 +38,7 @@ interface IMapProps {
   setCoordinates: any;
   places: any;
   setChildClicked: any;
+  weatherData: any;
 }
 
 const Map = ({
@@ -46,6 +47,7 @@ const Map = ({
   setCoordinates,
   places,
   setChildClicked,
+  weatherData,
 }: IMapProps) => {
   const classes = useStyles();
   const isDesktop = useMediaQuery(`(min-width:600px)`);
@@ -106,6 +108,15 @@ const Map = ({
             </div>
           );
         })}
+        {weatherData?.list?.length &&
+          weatherData.list.map((data, i) => (
+            <div key={i} data-lat={data.coord.lat} data-lng={data.coord.lon}>
+              <img
+                src={`http://openweathermap.org/img/w/${data.weather[0].icon}.png`}
+                height="70px"
+              />
+            </div>
+          ))}
       </GoogleMapReact>
     </div>
   );

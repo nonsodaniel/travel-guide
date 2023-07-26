@@ -13,8 +13,8 @@ const Header = ({ setCoordinates }: any) => {
     //@ts-ignore
 
     const location = autocomplete?.getPlace().geometry.location;
-    const lat = location.lat();
-    const lng = location.lng();
+    const lat = location?.lat();
+    const lng = location?.lng();
     if (lat && lng) setCoordinates({ lat, lng });
   };
 
